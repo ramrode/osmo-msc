@@ -1035,7 +1035,7 @@ static void vty_dump_one_subscr(struct vty *vty, struct vlr_subscr *vsub,
 		     vsub->cgi.lai.lac, vsub->cgi.cell_identity,
 		     VTY_NEWLINE);
 	MSC_VTY_DUMP(vty, offset, "RAN type: %s%s",
-		     osmo_rat_type_name(vsub->cs.attached_via_ran),
+		     osmo_rat_type_name(vsub->attached_via_ran),
 		     VTY_NEWLINE);
 
 	MSC_VTY_DUMP(vty, offset, "IMSI: %s%s",

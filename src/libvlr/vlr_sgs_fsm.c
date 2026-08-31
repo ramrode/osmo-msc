@@ -153,7 +153,7 @@ static void sgs_ue_fsm_lau_present(struct osmo_fsm_inst *fi, uint32_t event, voi
 		}
 
 		vlr_sgs_fsm_update_id(vsub);
-		vsub->cs.attached_via_ran = OSMO_RAT_EUTRAN_SGS;
+		vsub->attached_via_ran = OSMO_RAT_EUTRAN_SGS;
 
 		/* Check if we expect a TMSI REALLOCATION COMPLETE message from the MME
 		 * by checking the tmsi_new flag. If this flag is not GSM_RESERVED_TMSI

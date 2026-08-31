@@ -50,7 +50,7 @@ static void paging_response_timer_cb(void *data)
 {
 	struct vlr_subscr *vsub = data;
 
-	if (vsub->cs.attached_via_ran == OSMO_RAT_EUTRAN_SGS)
+	if (vsub->attached_via_ran == OSMO_RAT_EUTRAN_SGS)
 		sgs_iface_tx_serv_abrt(vsub);
 
 	paging_expired(vsub);
@@ -65,7 +65,7 @@ static int msc_paging_request(struct paging_request *pr, struct vlr_subscr *vsub
 	/* The subscriber was last seen in subscr->lac. Find out which
 	 * BSCs/RNCs are responsible and send them a paging request via open
 	 * SCCP connections (if any). */
-	switch (vsub->cs.attached_via_ran) {
+	switch (vsub->attached_via_ran) {
 	case OSMO_RAT_GERAN_A:
 		return ran_peers_down_paging(net->a.sri, CELL_IDENT_LAC, vsub, pr->cause);
 	case OSMO_RAT_UTRAN_IU:
@@ -110,7 +110,7 @@ struct paging_request *paging_request_start(struct vlr_subscr *vsub, enum paging
 		/* reduced on the first paging callback */
 		vlr_subscr_get(vsub, VSUB_USE_PAGING);
 		vsub->cs.is_paging = true;
-		paging_response_timer = osmo_tdef_get(msc_ran_infra[vsub->cs.attached_via_ran].tdefs, -4, OSMO_TDEF_S, 10);
+		paging_response_timer = osmo_tdef_get(msc_ran_infra[vsub->attached_via_ran].tdefs, -4, OSMO_TDEF_S, 10);
 		osmo_timer_setup(&vsub->cs.paging_response_timer, paging_response_timer_cb, vsub);
 		osmo_timer_schedule(&vsub->cs.paging_response_timer, paging_response_timer, 0);
 	}

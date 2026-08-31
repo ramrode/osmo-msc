@@ -166,6 +166,7 @@ struct vlr_subscr {
 
 	void *msc_conn_ref;
 
+	enum osmo_rat_type attached_via_ran;
 	/* PS (SGSN) specific parts */
 	struct {
 		struct llist_head pdp_list;
@@ -178,7 +179,6 @@ struct vlr_subscr {
 		/* list of struct subscr_request */
 		struct llist_head requests;
 		uint8_t lac;
-		enum osmo_rat_type attached_via_ran;
 	} cs;
 	/* SGs (MME) specific parts */
 	struct {

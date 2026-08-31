@@ -378,7 +378,7 @@ int msub_set_vsub(struct msub *msub, struct vlr_subscr *vsub)
 	if (vsub) {
 		vlr_subscr_get(vsub, VSUB_USE_MSUB);
 		msub->vsub = vsub;
-		vsub->cs.attached_via_ran = msub_ran(msub)->type;
+		vsub->attached_via_ran = msub_ran(msub)->type;
 		msub_update_id(msub);
 	}
 	return 0;

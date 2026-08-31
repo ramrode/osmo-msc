@@ -1559,7 +1559,7 @@ static int msc_vlr_subscr_assoc(void *msc_conn_ref,
 	/* FIXME: would be better to modify vsub->* only after the subscriber is authenticated, in
 	 * evaluate_acceptance_outcome(conn_accepted == true). */
 
-	vsub->cs.attached_via_ran = msc_a->c.ran->type;
+	vsub->attached_via_ran = msc_a->c.ran->type;
 
 	/* In case we have already received Classmark Information before the VLR Subscriber was
 	 * associated with the conn: merge the new Classmark into vsub->classmark. Don't overwrite valid

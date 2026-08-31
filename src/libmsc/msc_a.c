@@ -999,7 +999,7 @@ static void msc_a_fsm_releasing_onenter(struct osmo_fsm_inst *fi, uint32_t prev_
 		/* The connection is cleared. The MS will now go back to 4G,
 		   Switch the RAN type back to SGS. */
 		if (vsub && vsub->sgs_fsm->state == SGS_UE_ST_ASSOCIATED)
-			vsub->cs.attached_via_ran = OSMO_RAT_EUTRAN_SGS;
+			vsub->attached_via_ran = OSMO_RAT_EUTRAN_SGS;
 	}
 
 	if (vsub)
@@ -1441,11 +1441,11 @@ int msc_a_up_l3(struct msc_a *msc_a, struct msgb *msg)
 		return -EACCES;
 	}
 
-	if (vsub && vsub->cs.attached_via_ran != msc_a->c.ran->type) {
+	if (vsub && vsub->attached_via_ran != msc_a->c.ran->type) {
 		LOG_MSC_A(msc_a, LOGL_ERROR,
 			  "Illegal situation: RAN type mismatch:"
 			  " attached via %s, received message via %s\n",
-			  osmo_rat_type_name(vsub->cs.attached_via_ran),
+			  osmo_rat_type_name(vsub->attached_via_ran),
 			  osmo_rat_type_name(msc_a->c.ran->type));
 		return -EACCES;
 	}
