@@ -1590,6 +1590,17 @@ static void msc_vlr_subscr_inval(void *msc_conn_ref, struct vlr_subscr *vsub, en
 	}
 }
 
+/* TODO: implement correct location served cb */
+static bool msc_vlr_location_area_served(struct vlr_subscr *vsub, const struct osmo_location_area_id *lai)
+{
+	return true;
+}
+
+static int msc_vlr_tx_pvlr_request_lai(void *msc_conn_ref, const struct osmo_location_area_id *lai)
+{
+	return -ENOTSUP;
+}
+
 /* operations that we need to implement for libvlr */
 const struct vlr_ops msc_vlr_ops = {
 	.tx_auth_req = msc_vlr_tx_auth_req,
@@ -1602,9 +1613,11 @@ const struct vlr_ops msc_vlr_ops = {
 	.set_ciph_mode = msc_a_vlr_set_cipher_mode,
 	.tx_common_id = msc_vlr_tx_common_id,
 	.tx_mm_info = msc_vlr_tx_mm_info,
+	.tx_pvlr_request_lai = msc_vlr_tx_pvlr_request_lai,
 	.subscr_update = msc_vlr_subscr_update,
 	.subscr_assoc = msc_vlr_subscr_assoc,
 	.subscr_inval = msc_vlr_subscr_inval,
+	.location_area_served = msc_vlr_location_area_served,
 };
 
 struct msgb *gsm48_create_mm_serv_rej(enum gsm48_reject_value value)

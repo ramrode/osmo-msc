@@ -252,6 +252,9 @@ struct vlr_ops {
 
 	int (*tx_mm_info)(void *msc_conn_ref);
 
+	int (*tx_pvlr_request_rai)(void *msc_conn_ref, const struct osmo_routing_area_id *old_rai);
+	int (*tx_pvlr_request_lai)(void *msc_conn_ref, const struct osmo_location_area_id *old_lai);
+
 	/* notify MSC/SGSN that the subscriber data in VLR has been updated */
 	void (*subscr_update)(struct vlr_subscr *vsub);
 	/* notify MSC/SGSN that the given subscriber has been associated
@@ -259,6 +262,10 @@ struct vlr_ops {
 	int (*subscr_assoc)(void *msc_conn_ref, struct vlr_subscr *vsub);
 	/* notify MSC that the given subscriber is no longer valid. */
 	void (*subscr_inval)(void *msc_conn_ref, struct vlr_subscr *vsub, enum vlr_inval_reason reason);
+
+	/* decide if the location/routing area id is within the VLR or not */
+	bool (*location_area_served)(struct vlr_subscr *vsub, const struct osmo_location_area_id *lai);
+	bool (*routing_area_served)(struct vlr_subscr *vsub, const struct osmo_routing_area_id *rai);
 };
 
 /* An instance of the VLR codebase */
@@ -341,6 +348,9 @@ void vlr_subscr_rx_ciph_res(struct vlr_subscr *vsub, enum vlr_ciph_result_cause 
 int vlr_subscr_rx_tmsi_reall_compl(struct vlr_subscr *vsub);
 int vlr_subscr_rx_imsi_detach(struct vlr_subscr *vsub);
 int vlr_subscr_rx_rau_complete(struct vlr_subscr *vsub);
+void vlr_subscr_rx_pvlr_id_ack(struct vlr_subscr *vsub);
+void vlr_subscr_rx_pvlr_id_nack(struct vlr_subscr *vsub);
+
 
 struct vlr_instance *vlr_alloc(void *ctx, const struct vlr_ops *ops, bool is_ps);
 int vlr_start(struct vlr_instance *vlr, struct gsup_client_mux *gcm);
