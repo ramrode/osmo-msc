@@ -108,7 +108,7 @@ static int assoc_par_with_subscr(struct osmo_fsm_inst *fi, struct vlr_subscr *vs
 static const char *vlr_proc_arq_result_name(const struct osmo_fsm_inst *fi)
 {
 	struct proc_arq_priv *par = fi->priv;
-	return par->result? gsm48_reject_value_name(par->result) : "PASSED";
+	return par->result ? gsm48_reject_value_name(par->result) : "PASSED";
 }
 
 #define proc_arq_fsm_done(fi, res) _proc_arq_fsm_done(fi, res, __FILE__, __LINE__)
@@ -412,18 +412,17 @@ static void proc_arq_vlr_fn_init(struct osmo_fsm_inst *fi,
 		 * Set User Error: Unidentified Subscriber */
 		proc_arq_fsm_done(fi, GSM48_REJECT_IMSI_UNKNOWN_IN_VLR);
 		return;
-	} else {
-		/* TMSI was included, are we permitted to use it? */
-		if (vlr->cfg.parq_retrieve_imsi) {
-			/* Obtain_IMSI_VLR */
-			osmo_tdef_fsm_inst_state_chg(fi, PR_ARQ_S_WAIT_OBTAIN_IMSI, parq_fsm_state_tdef, vlr_tdefs, -1);
-			return;
-		} else {
-			/* Set User Error: Unidentified Subscriber */
-			proc_arq_fsm_done(fi, GSM48_REJECT_IMSI_UNKNOWN_IN_VLR);
-			return;
-		}
 	}
+
+	/* TMSI was included, are we permitted to use it? */
+	if (vlr->cfg.parq_retrieve_imsi) {
+		/* Obtain_IMSI_VLR */
+		osmo_tdef_fsm_inst_state_chg(fi, PR_ARQ_S_WAIT_OBTAIN_IMSI, parq_fsm_state_tdef, vlr_tdefs, -1);
+		return;
+	}
+
+	/* Set User Error: Unidentified Subscriber */
+	proc_arq_fsm_done(fi, GSM48_REJECT_IMSI_UNKNOWN_IN_VLR);
 }
 
 /* ID REQ(IMSI) has returned */
@@ -493,7 +492,7 @@ static void proc_arq_vlr_fn_w_ciph(struct osmo_fsm_inst *fi,
 	if (!data)
 		LOGPFSML(fi, LOGL_ERROR, "invalid ciphering result: NULL\n");
 	else
-		result = *(enum vlr_ciph_result_cause*)data;
+		result = *((enum vlr_ciph_result_cause *) data);
 
 	switch (result) {
 	case VLR_CIPH_COMPL:
@@ -788,14 +787,14 @@ static void upd_loc_child_f_w_hlr(struct osmo_fsm_inst *fi, uint32_t event,
 
 static const struct osmo_fsm_state upd_loc_child_vlr_states[] = {
 	[ULC_S_IDLE] = {
-		.in_event_mask = ,
+		.in_event_mask = TODO,
 		.out_state_mask = S(ULC_S_WAIT_HLR_RESP) |
 				  S(ULC_S_DONE),
 		.name = "IDLE",
 		.action = upd_loc_child_f_idle,
 	},
 	[ULC_S_WAIT_HLR_RESP] = {
-		.in_event_mask = ,
+		.in_event_mask = TODO,
 		.out_state_mask = S(ULC_S_DONE),
 		.name = "WAIT-HLR-RESP",
 		.action = upd_loc_child_f_w_hlr,

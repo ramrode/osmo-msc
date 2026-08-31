@@ -157,7 +157,7 @@ static struct osmo_fsm upd_hlr_vlr_fsm = {
 static inline struct vlr_subscr *upd_hlr_vlr_fi_priv(struct osmo_fsm_inst *fi)
 {
 	OSMO_ASSERT(fi->fsm == &upd_hlr_vlr_fsm);
-	return (struct vlr_subscr*)fi->priv;
+	return (struct vlr_subscr *) fi->priv;
 }
 
 struct osmo_fsm_inst *
@@ -269,7 +269,7 @@ static struct osmo_fsm sub_pres_vlr_fsm = {
 static inline struct vlr_subscr *sub_pres_vlr_fi_priv(struct osmo_fsm_inst *fi)
 {
 	OSMO_ASSERT(fi->fsm == &sub_pres_vlr_fsm);
-	return (struct vlr_subscr*)fi->priv;
+	return (struct vlr_subscr *) fi->priv;
 }
 
 /* THIS IS CURRENTLY DEAD CODE, SINCE WE NEVER SET vsub->ms_not_reachable_flag = true.
@@ -668,7 +668,7 @@ static struct osmo_fsm lu_compl_vlr_fsm = {
 static inline struct lu_compl_vlr_priv *lu_compl_vlr_fi_priv(struct osmo_fsm_inst *fi)
 {
 	OSMO_ASSERT(fi->fsm == &lu_compl_vlr_fsm);
-	return (struct lu_compl_vlr_priv*)fi->priv;
+	return (struct lu_compl_vlr_priv *) fi->priv;
 }
 
 struct osmo_fsm_inst *
@@ -1271,7 +1271,7 @@ static void lu_fsm_wait_ciph(struct osmo_fsm_inst *fi, uint32_t event,
 	if (!data)
 		LOGPFSML(fi, LOGL_ERROR, "invalid ciphering result: NULL\n");
 	else
-		result = *(enum vlr_ciph_result_cause*)data;
+		result = *((enum vlr_ciph_result_cause *) data);
 
 	switch (result) {
 	case VLR_CIPH_COMPL:
@@ -1393,7 +1393,7 @@ static void lu_fsm_wait_lu_compl(struct osmo_fsm_inst *fi, uint32_t event,
 	case VLR_ULA_E_LU_COMPL_FAILURE:
 		cause = GSM48_REJECT_NETWORK_FAILURE;
 		if (data)
-			cause = *(uint8_t*)data;
+			cause = *((uint8_t *) data);
 		lu_fsm_discard_lu_compl_fsm(fi);
 		lu_fsm_failure(fi, cause);
 		break;
@@ -1425,7 +1425,7 @@ static void lu_fsm_wait_lu_compl_standalone(struct osmo_fsm_inst *fi,
 		vsub->sub_dataconf_by_hlr_ind = false;
 		cause = GSM48_REJECT_NETWORK_FAILURE;
 		if (data)
-			cause = *(uint8_t*)data;
+			cause = *((uint8_t *) data);
 		lu_fsm_discard_lu_compl_fsm(fi);
 		lu_fsm_failure(fi, cause);
 		break;
@@ -1635,7 +1635,7 @@ static struct osmo_fsm vlr_lu_fsm = {
 static inline struct lu_fsm_priv *lu_fsm_fi_priv(struct osmo_fsm_inst *fi)
 {
 	OSMO_ASSERT(fi->fsm == &vlr_lu_fsm);
-	return (struct lu_fsm_priv*)fi->priv;
+	return (struct lu_fsm_priv *) fi->priv;
 }
 
 static struct osmo_fsm_inst *

@@ -119,7 +119,7 @@ struct vlr_subscr {
 	struct vlr_instance *vlr;
 
 	/* TODO either populate from HLR or drop this completely? */
-	long long unsigned int id;
+	unsigned long long id;
 
 	/* Data from HLR */				/* 3GPP TS 23.008 */
 	/* Always use vlr_subscr_set_imsi() to write to imsi[] */

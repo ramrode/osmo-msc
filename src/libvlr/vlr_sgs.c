@@ -319,8 +319,6 @@ static void Ts5_timeout_cb(void *arg)
 
 	/* Balance ref count increment from vlr_sgs_pag() */
 	vlr_subscr_put(vsub, VSUB_USE_SGS_PAGING_REQ);
-
-	return;
 }
 
 /*! Notify that a paging message has been sent and a paging is now in progress.

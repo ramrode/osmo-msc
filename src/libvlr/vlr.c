@@ -237,15 +237,15 @@ const char *vlr_subscr_name(const struct vlr_subscr *vsub)
 		present = true;
 	}
 	if (vsub->msisdn[0]) {
-		OSMO_STRBUF_PRINTF(sb, "%sMSISDN-%s", present? ":" : "", vsub->msisdn);
+		OSMO_STRBUF_PRINTF(sb, "%sMSISDN-%s", present ? ":" : "", vsub->msisdn);
 		present = true;
 	}
 	if (vsub->tmsi != GSM_RESERVED_TMSI) {
-		OSMO_STRBUF_PRINTF(sb, "%sTMSI-0x%08X", present? ":" : "", vsub->tmsi);
+		OSMO_STRBUF_PRINTF(sb, "%sTMSI-0x%08X", present ? ":" : "", vsub->tmsi);
 		present = true;
 	}
 	if (vsub->tmsi_new != GSM_RESERVED_TMSI) {
-		OSMO_STRBUF_PRINTF(sb, "%sTMSInew-0x%08X", present? ":" : "", vsub->tmsi_new);
+		OSMO_STRBUF_PRINTF(sb, "%sTMSInew-0x%08X", present ? ":" : "", vsub->tmsi_new);
 		present = true;
 	}
 	if (!present)
@@ -257,7 +257,7 @@ const char *vlr_subscr_name(const struct vlr_subscr *vsub)
 const char *vlr_subscr_short_name(const struct vlr_subscr *vsub, unsigned int maxlen)
 {
 	/* cast away the const so we can shorten the string within the static buffer */
-	char *name = (char*)vlr_subscr_name(vsub);
+	char *name = (char *) vlr_subscr_name(vsub);
 	size_t len = strlen(name);
 	if (maxlen < 2)
 		return "-";
@@ -379,7 +379,7 @@ static int vlr_subscr_use_cb(struct osmo_use_count_entry *e, int32_t old_use_cou
 		level = LOGL_DEBUG;
 
 	LOGPSRC(g_vlr_log_cat[OSMO_VLR_LOGC_VLR], level, file, line, "VLR subscr %s %s %s: now used by %s\n",
-		vlr_subscr_name(vsub), (e->count - old_use_count) > 0? "+" : "-", e->use,
+		vlr_subscr_name(vsub), (e->count - old_use_count) > 0 ? "+" : "-", e->use,
 		osmo_use_count_name_buf(buf, sizeof(buf), e->use_count));
 
 	if (e->count < 0)
@@ -713,8 +713,8 @@ void vlr_subscr_set_last_used_eutran_plmn_id(struct vlr_subscr *vsub,
 	}
 	LOGVLR(LOGL_DEBUG, "set Last E-UTRAN PLMN ID on subscriber: %s\n",
 	       vsub->sgs.last_eutran_plmn_present ?
-	         osmo_plmn_name(&vsub->sgs.last_eutran_plmn) :
-		 "(none)");
+	       osmo_plmn_name(&vsub->sgs.last_eutran_plmn) :
+	       "(none)");
 }
 
 bool vlr_subscr_matches_imsi(struct vlr_subscr *vsub, const char *imsi)
@@ -818,7 +818,7 @@ struct sgsn_subscriber_pdp_data {
 struct sgsn_subscriber_pdp_data *
 vlr_subscr_pdp_data_alloc(struct vlr_subscr *vsub)
 {
-	struct sgsn_subscriber_pdp_data* pdata;
+	struct sgsn_subscriber_pdp_data *pdata;
 
 	pdata = talloc_zero(vsub, struct sgsn_subscriber_pdp_data);
 
@@ -1453,7 +1453,7 @@ int vlr_subscr_rx_id_resp(struct vlr_subscr *vsub, const struct osmo_mobile_iden
 		switch (mi->type) {
 		case GSM_MI_TYPE_IMSI:
 			return osmo_fsm_inst_dispatch(vsub->auth_fsm,
-						      VLR_AUTH_E_MS_ID_IMSI, (void*)mi->imsi);
+						      VLR_AUTH_E_MS_ID_IMSI, (void *) mi->imsi);
 			break;
 		}
 	}
@@ -1461,11 +1461,11 @@ int vlr_subscr_rx_id_resp(struct vlr_subscr *vsub, const struct osmo_mobile_iden
 	if (vsub->lu_fsm) {
 		switch (mi->type) {
 		case GSM_MI_TYPE_IMSI:
-			return osmo_fsm_inst_dispatch(vsub->lu_fsm, VLR_ULA_E_ID_IMSI, (void*)mi->imsi);
+			return osmo_fsm_inst_dispatch(vsub->lu_fsm, VLR_ULA_E_ID_IMSI, (void *) mi->imsi);
 		case GSM_MI_TYPE_IMEI:
-			return osmo_fsm_inst_dispatch(vsub->lu_fsm, VLR_ULA_E_ID_IMEI, (void*)mi->imei);
+			return osmo_fsm_inst_dispatch(vsub->lu_fsm, VLR_ULA_E_ID_IMEI, (void *) mi->imei);
 		case GSM_MI_TYPE_IMEISV:
-			return osmo_fsm_inst_dispatch(vsub->lu_fsm, VLR_ULA_E_ID_IMEISV, (void*)mi->imeisv);
+			return osmo_fsm_inst_dispatch(vsub->lu_fsm, VLR_ULA_E_ID_IMEISV, (void *) mi->imeisv);
 		default:
 			return -EINVAL;
 		}

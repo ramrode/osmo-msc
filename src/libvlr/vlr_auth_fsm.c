@@ -196,7 +196,7 @@ static bool check_auth_resp(struct vlr_subscr *vsub, bool is_r99,
 			 " (MS is %sR99 capable, vec has %sUMTS AKA tokens, res_len=%u is %s)\n",
 			 is_r99 ? "" : "NOT ",
 			 (vec->auth_types & OSMO_AUTH_TYPE_UMTS) ? "" : "NO ",
-			 res_len, (res_len == vec->res_len)? "valid" : "INVALID on UTRAN");
+			 res_len, (res_len == vec->res_len) ? "valid" : "INVALID on UTRAN");
 		goto out_false;
 	}
 
@@ -213,20 +213,20 @@ static bool check_auth_resp(struct vlr_subscr *vsub, bool is_r99,
 			 " context\n");
 		vsub->sec_ctx = VLR_SEC_CTX_UMTS;
 		return true;
-	} else {
-		if (res_len != sizeof(vec->sres)
-		    || memcmp(res, vec->sres, sizeof(vec->sres))) {
-			LOGVSUBP(LOGL_INFO, vsub, "GSM AUTH failure:"
-				 " mismatching sres (expected sres=%s)\n",
-				 osmo_hexdump(vec->sres, sizeof(vec->sres)));
-			goto out_false;
-		}
-
-		LOGVSUBP(LOGL_INFO, vsub, "AUTH established GSM security"
-			 " context\n");
-		vsub->sec_ctx = VLR_SEC_CTX_GSM;
-		return true;
 	}
+
+	if (res_len != sizeof(vec->sres)
+	    || memcmp(res, vec->sres, sizeof(vec->sres))) {
+		LOGVSUBP(LOGL_INFO, vsub, "GSM AUTH failure:"
+			 " mismatching sres (expected sres=%s)\n",
+			 osmo_hexdump(vec->sres, sizeof(vec->sres)));
+		goto out_false;
+	}
+
+	LOGVSUBP(LOGL_INFO, vsub, "AUTH established GSM security"
+		 " context\n");
+	vsub->sec_ctx = VLR_SEC_CTX_GSM;
+	return true;
 
 out_false:
 	vsub->sec_ctx = VLR_SEC_CTX_NONE;
