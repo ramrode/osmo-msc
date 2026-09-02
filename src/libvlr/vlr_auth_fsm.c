@@ -681,6 +681,36 @@ struct osmo_fsm_inst *auth_fsm_start(struct vlr_subscr *vsub,
 	return fi;
 }
 
+bool auth_ciph_sec_ctx_is_usable(const struct vlr_subscr *vsub, uint8_t key_seq)
+{
+	int max_reuse_count = vsub->vlr->cfg.ciph_sec_ctx_max_reuse;
+	struct vlr_auth_tuple *at = vsub->last_tuple;
+
+	if (key_seq == 0x7) /* No key available */
+		return false;
+	if (!at)
+		return false;
+	if ((max_reuse_count >= 0) && (at->ciph_use_count > max_reuse_count))
+		return false;
+	if (at->key_seq != key_seq)
+		return false;
+
+	return true;
+}
+
+bool auth_ciph_sec_ctx_use(struct vlr_subscr *vsub, uint8_t key_seq)
+{
+	struct vlr_auth_tuple *at = vsub->last_tuple;
+
+	if (!auth_ciph_sec_ctx_is_usable(vsub, key_seq))
+		return false;
+
+	OSMO_ASSERT(at);
+	at->ciph_use_count++;
+
+	return true;
+}
+
 bool auth_try_reuse_tuple(struct vlr_subscr *vsub, uint8_t key_seq)
 {
 	int max_reuse_count = vsub->vlr->cfg.auth_tuple_max_reuse_count;

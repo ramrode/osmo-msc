@@ -964,6 +964,12 @@ static void vlr_loc_upd_post_auth(struct osmo_fsm_inst *fi)
 		return;
 	}
 
+	if (!auth_ciph_sec_ctx_use(vsub, vsub->last_tuple->key_seq)) {
+		LOGPFSML(fi, LOGL_ERROR, "Cannot start ciphering, auth tuple not available, even when it should!\n");
+		lu_fsm_failure(fi, GSM48_REJECT_NETWORK_FAILURE);
+		return;
+	}
+
 	if (vlr_set_ciph_mode(vsub->vlr, fi, lfp->msc_conn_ref,
 			      vsub->sec_ctx,
 			      vsub->vlr->cfg.retrieve_imeisv_ciphered)) {

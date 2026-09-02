@@ -532,7 +532,9 @@ DEFUN(cfg_msc_auth_tuple_max_reuse_count, cfg_msc_auth_tuple_max_reuse_count_cmd
       "Configure authentication tuple re-use\n"
       "0 to use each auth tuple at most once (default), >0 to limit re-use, -1 to re-use infinitely (vulnerable!).\n")
 {
-	gsmnet->vlr->cfg.auth_tuple_max_reuse_count = atoi(argv[0]);
+	int count = atoi(argv[0]);
+	gsmnet->vlr->cfg.auth_tuple_max_reuse_count = count;
+	gsmnet->vlr->cfg.ciph_sec_ctx_max_reuse = count;
 	return CMD_SUCCESS;
 }
 

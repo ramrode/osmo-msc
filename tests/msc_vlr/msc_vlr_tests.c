@@ -679,6 +679,7 @@ void clear_vlr()
 	net->vlr->cfg.retrieve_imeisv_early = false;
 	net->vlr->cfg.retrieve_imeisv_ciphered = false;
 	net->vlr->cfg.auth_tuple_max_reuse_count = 0;
+	net->vlr->cfg.ciph_sec_ctx_max_reuse = 0;
 	net->vlr->cfg.auth_reuse_old_sets_on_error = false;
 
 	rx_from_ran = OSMO_RAT_GERAN_A;

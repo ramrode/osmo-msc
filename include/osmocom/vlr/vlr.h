@@ -83,6 +83,7 @@ enum vlr_ciph_result_cause {
 
 struct vlr_auth_tuple {
 	int auth_use_count;
+	int ciph_use_count;
 	int key_seq;
 	struct osmo_auth_vector vec;
 };
@@ -282,6 +283,8 @@ struct vlr_instance {
 		bool check_imei_rqd;
 		int auth_tuple_max_reuse_count;
 		bool auth_reuse_old_sets_on_error;
+		/* how often a security context / cksq is re-used before a new auth tuple is used */
+		int ciph_sec_ctx_max_reuse;
 		bool parq_retrieve_imsi;
 		bool is_ps;
 		uint8_t nri_bitlen;

@@ -322,6 +322,11 @@ static void _proc_arq_vlr_node2(struct osmo_fsm_inst *fi)
 		return;
 	}
 
+	if (!auth_ciph_sec_ctx_use(vsub, par->key_seq)) {
+		LOGPFSML(fi, LOGL_ERROR, "Cannot start ciphering, auth tuple not available, even when it should!\n");
+		proc_arq_fsm_done(fi, GSM48_REJECT_NETWORK_FAILURE);
+	}
+
 	if (vlr_set_ciph_mode(vsub->vlr, fi, par->msc_conn_ref,
 			      vsub->sec_ctx,
 			      vsub->vlr->cfg.retrieve_imeisv_ciphered)) {
@@ -341,7 +346,7 @@ static bool is_auth_to_be_attempted(struct proc_arq_priv *par)
 	 * are defined in 3GPP TS 33.102 */
 	/* For now we use a default value passed in to vlr_lu_fsm(). */
 	return par->authentication_required ||
-		(par->is_ciphering_to_be_attempted && !auth_try_reuse_tuple(par->vsub, par->key_seq));
+		(par->is_ciphering_to_be_attempted && !auth_ciph_sec_ctx_is_usable(par->vsub, par->key_seq));
 }
 
 /* after the IMSI is known */
@@ -458,6 +463,9 @@ static void proc_arq_vlr_fn_w_auth(struct osmo_fsm_inst *fi,
 	switch (event) {
 	case PR_ARQ_E_AUTH_RES:
 		/* Node 2 */
+		OSMO_ASSERT(par->vsub);
+		OSMO_ASSERT(par->vsub->last_tuple);
+		par->key_seq = par->vsub->last_tuple->key_seq;
 		_proc_arq_vlr_node2(fi);
 		return;
 

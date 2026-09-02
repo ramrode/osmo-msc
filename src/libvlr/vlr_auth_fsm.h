@@ -40,3 +40,5 @@ struct osmo_fsm_inst *auth_fsm_start(struct vlr_subscr *vsub,
 void vlr_auth_fsm_init(bool is_ps);
 void vlr_auth_fsm_set_log_subsys(int log_level);
 bool auth_try_reuse_tuple(struct vlr_subscr *vsub, uint8_t key_seq);
+bool auth_ciph_sec_ctx_is_usable(const struct vlr_subscr *vsub, uint8_t key_seq);
+bool auth_ciph_sec_ctx_use(struct vlr_subscr *vsub, uint8_t key_seq);

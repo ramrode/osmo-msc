@@ -38,6 +38,7 @@ static void _test_auth_reuse(enum osmo_rat_type via_ran,
 	net->authentication_required = true;
 	net->vlr->cfg.assign_tmsi = true;
 	net->vlr->cfg.auth_tuple_max_reuse_count = set_max_reuse_count;
+	net->vlr->cfg.ciph_sec_ctx_max_reuse = set_max_reuse_count;
 	net->vlr->cfg.auth_reuse_old_sets_on_error = false;
 	rx_from_ran = via_ran;
 
