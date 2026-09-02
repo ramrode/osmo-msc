@@ -716,9 +716,9 @@ vlr_proc_acc_req(struct osmo_fsm_inst *parent,
 			(is_ciphering_to_be_attempted ? "+Ciph" : " (no Ciph)")
 			: "");
 
-	if (is_utran && !authentication_required)
+	if (is_utran && (!authentication_required && !is_ciphering_required))
 		LOGPFSML(fi, LOGL_ERROR,
-			 "Authentication off on UTRAN network. Good luck.\n");
+			 "Authentication & Ciphering is off on UTRAN network. Good luck.\n");
 
 	switch (mi->type) {
 	case GSM_MI_TYPE_IMSI:
