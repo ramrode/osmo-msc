@@ -144,7 +144,7 @@ static void _test_auth_reuse(enum osmo_rat_type via_ran,
 		vsub = vlr_subscr_find_by_imsi(net->vlr, imsi, __func__);
 		OSMO_ASSERT(vsub);
 		OSMO_ASSERT(vsub->last_tuple);
-		VERBOSE_ASSERT(vsub->last_tuple->use_count, == expected_use_count, "%d");
+		VERBOSE_ASSERT(vsub->last_tuple->auth_use_count, == expected_use_count, "%d");
 		vlr_subscr_put(vsub, __func__);
 
 		BTW("after a while, a new conn sends a CM Service Request. VLR responds with Auth Req,"
@@ -189,7 +189,7 @@ static void _test_auth_reuse(enum osmo_rat_type via_ran,
 		vsub = vlr_subscr_find_by_imsi(net->vlr, imsi, __func__);
 		OSMO_ASSERT(vsub);
 		OSMO_ASSERT(vsub->last_tuple);
-		VERBOSE_ASSERT(vsub->last_tuple->use_count, == expected_use_count, "%d");
+		VERBOSE_ASSERT(vsub->last_tuple->auth_use_count, == expected_use_count, "%d");
 		vlr_subscr_put(vsub, __func__);
 
 		BTW("after a while, a new conn sends a CM Service Request. VLR responds with Auth Req,"

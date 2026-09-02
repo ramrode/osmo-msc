@@ -999,7 +999,7 @@ static int fake_vlr_tx_auth_req(void *msc_conn_ref, struct vlr_auth_tuple *at,
 	bool ok = true;
 	btw("sending %s Auth Request for %s: tuple use_count=%d key_seq=%d auth_types=0x%x and...",
 	    send_autn? "UMTS" : "GSM", msc_a->c.fi->id,
-	    at->use_count, at->key_seq, at->vec.auth_types);
+	    at->auth_use_count, at->key_seq, at->vec.auth_types);
 
 	hex = osmo_hexdump_nospc((void*)&at->vec.rand, sizeof(at->vec.rand));
 	btw("...rand=%s", hex);

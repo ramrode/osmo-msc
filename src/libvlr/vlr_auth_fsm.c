@@ -77,7 +77,7 @@ struct auth_fsm_priv {
 
 /* Always use either vlr_subscr_get_auth_tuple() or vlr_subscr_has_auth_tuple()
  * instead, to ensure proper use count.
- * Return an auth tuple with the lowest use_count among the auth tuples. If
+ * Return an auth tuple with the lowest auth_use_count among the auth tuples. If
  * max_reuse_count >= 0, return NULL if all available auth tuples have a use
  * count > max_reuse_count. If max_reuse_count is negative, return a currently
  * least used auth tuple without enforcing a maximum use count.  If there are
@@ -109,11 +109,11 @@ _vlr_subscr_next_auth_tuple(struct vlr_subscr *vsub, int max_reuse_count)
 		if (vsub->auth_tuples[idx].key_seq == VLR_KEY_SEQ_INVAL)
 			continue;
 
-		if (!at || vsub->auth_tuples[idx].use_count < at->use_count)
+		if (!at || vsub->auth_tuples[idx].auth_use_count < at->auth_use_count)
 			at = &vsub->auth_tuples[idx];
 	}
 
-	if (!at || (max_reuse_count >= 0 && at->use_count > max_reuse_count))
+	if (!at || (max_reuse_count >= 0 && at->auth_use_count > max_reuse_count))
 		return NULL;
 
 	return at;
@@ -127,7 +127,7 @@ vlr_subscr_get_auth_tuple(struct vlr_subscr *vsub, int max_reuse_count)
 							       max_reuse_count);
 	if (!at)
 		return NULL;
-	at->use_count++;
+	at->auth_use_count++;
 	return at;
 }
 
@@ -323,7 +323,7 @@ static int _vlr_subscr_authenticate(struct osmo_fsm_inst *fi)
 	use_umts_aka = vlr_use_umts_aka(&at->vec, afp->is_r99);
 	LOGPFSM(fi, "got auth tuple: use_count=%d key_seq=%d"
 		" -- will use %s AKA (is_r99=%s, at->vec.auth_types=0x%x)\n",
-		at->use_count, at->key_seq,
+		at->auth_use_count, at->key_seq,
 		use_umts_aka ? "UMTS" : "GSM", afp->is_r99 ? "yes" : "no", at->vec.auth_types);
 
 	/* Transmit auth req to subscriber */
@@ -688,10 +688,10 @@ bool auth_try_reuse_tuple(struct vlr_subscr *vsub, uint8_t key_seq)
 
 	if (!at)
 		return false;
-	if ((max_reuse_count >= 0) && (at->use_count > max_reuse_count))
+	if ((max_reuse_count >= 0) && (at->auth_use_count > max_reuse_count))
 		return false;
 	if (at->key_seq != key_seq)
 		return false;
-	at->use_count++;
+	at->auth_use_count++;
 	return true;
 }

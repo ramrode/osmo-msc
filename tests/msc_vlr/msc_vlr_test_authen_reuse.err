@@ -203,7 +203,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:GERAN-A:LU){MSC_A_S
 
 - Now the auth tuple has use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -321,7 +321,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:GERAN-A:CM_SERVICE_
 
 - Now the auth tuple has use_count == 2, as much as is allowed.
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 2
+  vsub->last_tuple->auth_use_count == 2
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -723,7 +723,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:UTRAN-Iu:LU){MSC_A_
 
 - Now the auth tuple has use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -847,7 +847,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:UTRAN-Iu:CM_SERVICE
 
 - Now the auth tuple has use_count == 2, as much as is allowed.
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 2
+  vsub->last_tuple->auth_use_count == 2
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -1245,7 +1245,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:GERAN-A:LU){MSC_A_S
 
 - Now the auth tuple has use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -1363,7 +1363,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:GERAN-A:CM_SERVICE_
 
 - Now the auth tuple has use_count == 2
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 2
+  vsub->last_tuple->auth_use_count == 2
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -1481,7 +1481,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:GERAN-A:CM_SERVICE_
 
 - Now the auth tuple has use_count == 3
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 3
+  vsub->last_tuple->auth_use_count == 3
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -1871,7 +1871,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:UTRAN-Iu:LU){MSC_A_
 
 - Now the auth tuple has use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -1995,7 +1995,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:UTRAN-Iu:CM_SERVICE
 
 - Now the auth tuple has use_count == 2
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 2
+  vsub->last_tuple->auth_use_count == 2
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -2119,7 +2119,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:UTRAN-Iu:CM_SERVICE
 
 - Now the auth tuple has use_count == 3
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 3
+  vsub->last_tuple->auth_use_count == 3
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -2505,7 +2505,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:GERAN-A:LU){MSC_A_S
 
 - Now the auth tuple has use_count == 1, as much as is allowed.
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 
@@ -2907,7 +2907,7 @@ DMSC msc_a(IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100:UTRAN-Iu:LU){MSC_A_
 
 - Now the auth tuple has use_count == 1, as much as is allowed.
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 + _test_auth_reuse: now used by 2 (attached,_test_auth_reuse)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000010650:MSISDN-42342:TMSI-0x03020100 - _test_auth_reuse: now used by 1 (attached)
 
 

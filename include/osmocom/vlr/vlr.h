@@ -82,7 +82,7 @@ enum vlr_ciph_result_cause {
 };
 
 struct vlr_auth_tuple {
-	int use_count;
+	int auth_use_count;
 	int key_seq;
 	struct osmo_auth_vector vec;
 };

@@ -362,7 +362,7 @@ DMSC msc_a(IMSI-901700000004620:MSISDN-46071:GERAN-A:LU){MSC_A_ST_RELEASED}: Dea
 
 - Now one auth tuple is available, but used.
 DVLR VLR subscr IMSI-901700000004620:MSISDN-46071 + test_hlr_rej_auth_info_net_fail_reuse_tuples: now used by 2 (attached,test_hlr_rej_auth_info_net_fail_reuse_tuples)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000004620:MSISDN-46071 - test_hlr_rej_auth_info_net_fail_reuse_tuples: now used by 1 (attached)
 
 
@@ -691,7 +691,7 @@ DMSC msc_a(IMSI-901700000004620:MSISDN-46071:GERAN-A:LU){MSC_A_ST_RELEASED}: Dea
 
 - Now one auth tuple is available, but used.
 DVLR VLR subscr IMSI-901700000004620:MSISDN-46071 + test_hlr_rej_auth_info_net_fail_no_reuse_tuples: now used by 2 (attached,test_hlr_rej_auth_info_net_fail_no_reuse_tuples)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000004620:MSISDN-46071 - test_hlr_rej_auth_info_net_fail_no_reuse_tuples: now used by 1 (attached)
 
 
@@ -958,7 +958,7 @@ DMSC msc_a(IMSI-901700000004620:MSISDN-46071:GERAN-A:LU){MSC_A_ST_RELEASED}: Dea
 
 - Now one auth tuple is available, but used.
 DVLR VLR subscr IMSI-901700000004620:MSISDN-46071 + test_hlr_rej_auth_info_unkown_imsi_no_reuse_tuples: now used by 2 (attached,test_hlr_rej_auth_info_unkown_imsi_no_reuse_tuples)
-  vsub->last_tuple->use_count == 1
+  vsub->last_tuple->auth_use_count == 1
 DVLR VLR subscr IMSI-901700000004620:MSISDN-46071 - test_hlr_rej_auth_info_unkown_imsi_no_reuse_tuples: now used by 1 (attached)
 
 

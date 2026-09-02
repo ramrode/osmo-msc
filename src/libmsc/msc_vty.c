@@ -1078,7 +1078,7 @@ static void vty_dump_one_subscr(struct vty *vty, struct vlr_subscr *vsub,
 	if (vsub->last_tuple) {
 		struct vlr_auth_tuple *t = vsub->last_tuple;
 		MSC_VTY_DUMP(vty, offset, "A3A8 last tuple (used %d times): %s",
-			     t->use_count, VTY_NEWLINE);
+			     t->auth_use_count, VTY_NEWLINE);
 		MSC_VTY_DUMP(vty, offset + 2, "seq # : %d%s",
 			     t->key_seq, VTY_NEWLINE);
 		MSC_VTY_DUMP(vty, offset + 2, "RAND  : %s%s",

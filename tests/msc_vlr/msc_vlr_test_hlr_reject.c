@@ -138,7 +138,7 @@ static void test_hlr_rej_auth_info_net_fail_no_reuse_tuples()
 	vsub = vlr_subscr_find_by_imsi(net->vlr, imsi, __func__);
 	OSMO_ASSERT(vsub);
 	OSMO_ASSERT(vsub->last_tuple);
-	VERBOSE_ASSERT(vsub->last_tuple->use_count, == 1, "%d");
+	VERBOSE_ASSERT(vsub->last_tuple->auth_use_count, == 1, "%d");
 	/* no need to look at all auth tuples, the ongoing test would take an
 	 * unexpected course if there were more. */
 	vlr_subscr_put(vsub, __func__);
@@ -227,7 +227,7 @@ static void test_hlr_rej_auth_info_unkown_imsi_no_reuse_tuples()
 	vsub = vlr_subscr_find_by_imsi(net->vlr, imsi, __func__);
 	OSMO_ASSERT(vsub);
 	OSMO_ASSERT(vsub->last_tuple);
-	VERBOSE_ASSERT(vsub->last_tuple->use_count, == 1, "%d");
+	VERBOSE_ASSERT(vsub->last_tuple->auth_use_count, == 1, "%d");
 	/* no need to look at all auth tuples, the ongoing test would take an
 	 * unexpected course if there were more. */
 	vlr_subscr_put(vsub, __func__);
@@ -352,7 +352,7 @@ static void test_hlr_rej_auth_info_net_fail_reuse_tuples()
 	vsub = vlr_subscr_find_by_imsi(net->vlr, imsi, __func__);
 	OSMO_ASSERT(vsub);
 	OSMO_ASSERT(vsub->last_tuple);
-	VERBOSE_ASSERT(vsub->last_tuple->use_count, == 1, "%d");
+	VERBOSE_ASSERT(vsub->last_tuple->auth_use_count, == 1, "%d");
 	/* no need to look at all auth tuples, the ongoing test would take an
 	 * unexpected course if there were more. */
 	vlr_subscr_put(vsub, __func__);
