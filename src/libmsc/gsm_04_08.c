@@ -419,6 +419,7 @@ static int mm_rx_loc_upd_req(struct msc_a *msc_a, struct msgb *msg)
 				osmo_gsm48_classmark1_is_r99(&lu->classmark1),
 				is_utran,
 				net->vlr->cfg.assign_tmsi);
+	vlr_loc_start(lu_fsm);
 	if (!lu_fsm) {
 		LOG_MSC_A(msc_a, LOGL_ERROR, "Can't start LU FSM\n");
 		msc_a_put(msc_a, MSC_A_USE_LOCATION_UPDATING);
