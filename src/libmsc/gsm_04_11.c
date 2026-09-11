@@ -1123,10 +1123,15 @@ static struct gsm_trans *gsm411_trans_init(struct gsm_network *net, struct vlr_s
 
 		osmo_fsm_inst_dispatch(msc_a->c.fi, MSC_A_EV_TRANSACTION_ACCEPTED, trans);
 		if (mo) {
-			if (!osmo_use_count_by(&msc_a->use_count, MSC_A_USE_CM_SERVICE_SMS))
-				LOG_TRANS(trans, LOGL_ERROR, "MO SMS without prior CM Service Request\n");
-			else
+			if (!osmo_use_count_by(&msc_a->use_count, MSC_A_USE_CM_SERVICE_SMS)) {
+				if (vsub->attached_via_ran == OSMO_RAT_EUTRAN_SGS) {
+					/* SMS over the SG interface from MME (OS#6207) */
+				} else {
+					LOG_TRANS(trans, LOGL_ERROR, "MO SMS without prior CM Service Request\n");
+				}
+			} else {
 				msc_a_put(msc_a, MSC_A_USE_CM_SERVICE_SMS);
+			}
 		}
 
 		/* If we're re-using the existing LU connection, drop the LU token.
